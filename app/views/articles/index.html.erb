@@ -1,11 +1,28 @@
 <p id="notice"><%= notice %></p>
 
+<div class="float left my-5">
+  <ul class="nav nav-pills nav-stacked">
+    <div class="mr-4">
+    <li><%= link_to 'All Categories', root_path %></li>
+    <hr>
+  </div>
+    <% Category.all.each do |category| %>
+    <div class="mr-4">
+    <li><%= link_to category.name, articles_path(category: category.name) %></li>
+    <hr>
+    </div>
+    <% end %>
+  </ul>
+</div>
+
+
+
 <%if request.original_url.split('=').last.include? '/'%>
 <h1>All Articles</h1>
 <%else%>
 <h1>All <%= request.original_url.split('=').last%>  Articles</h1>
 <%end%>
-
+<hr>
 
 <% @articles.each do |article|  %>
  <h2><%=link_to article.title,article%></h2>
